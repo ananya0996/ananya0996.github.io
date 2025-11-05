@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ananya's Portfolio</title>
+    <title>ananya pandey | fullstack developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,217 +15,180 @@
         }
 
         body {
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            color: #fff;
-            overflow-x: hidden;
+            font-family: 'Space Mono', monospace;
+            background-color: #b55163;
+            color: #ffffff;
+            line-height: 1.6;
+            text-transform: lowercase;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 60px 40px;
-            text-align: center;
-            max-width: 600px;
-            width: 100%;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            position: relative;
-            overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        .profile-section {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffffff;
+            flex-shrink: 0;
+        }
+
+        .profile-content {
+            flex: 1;
+            min-width: 280px;
         }
 
         h1 {
-            font-size: 3.5rem;
-            font-weight: 600;
-            margin-bottom: 30px;
-            background: linear-gradient(45deg, #fff, #f0f0f0);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-            position: relative;
+            font-size: 3rem;
+            margin-bottom: 8px;
+            color: #ffffff;
+            font-weight: 700;
         }
 
-        .cursor {
-            display: inline-block;
-            background: #fff;
-            width: 3px;
-            height: 1em;
-            animation: blink 1s infinite;
-            margin-left: 5px;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-
-        .message {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 40px;
+        .subtitle {
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            color: #ffffff;
             opacity: 0.9;
         }
 
-        .linkedin-link {
-            display: inline-block;
-            color: #fff;
+        .intro {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .link-item {
             text-decoration: none;
-            font-weight: 500;
-            padding: 15px 30px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: 2px solid #ffffff;
+            border-radius: 4px;
             transition: all 0.3s ease;
-            backdrop-filter: blur(5px);
-            background: rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
         }
 
-        .linkedin-link:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .link-item:hover {
+            background-color: #ffffff;
+            color: #b55163;
         }
 
-        .dots {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            color: #b55163;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
             pointer-events: none;
-            overflow: hidden;
+            z-index: 1000;
         }
 
-        .dot {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
+        .toast.show {
+            opacity: 1;
         }
 
-        .dot:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
-        .dot:nth-child(2) { top: 80%; left: 80%; animation-delay: 2s; }
-        .dot:nth-child(3) { top: 40%; left: 80%; animation-delay: 4s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); opacity: 0.3; }
-            50% { transform: translateY(-20px); opacity: 0.8; }
-        }
-
-        /* Mobile responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
             .container {
-                padding: 40px 30px;
-                margin: 20px;
+                padding: 40px 20px;
+            }
+
+            .profile-section {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .profile-image {
+                width: 120px;
+                height: 120px;
             }
 
             h1 {
-                font-size: 2.5rem;
-                margin-bottom: 25px;
+                font-size: 1.5rem;
             }
 
-            .message {
-                font-size: 1rem;
-                margin-bottom: 35px;
-            }
-
-            .linkedin-link {
-                padding: 12px 25px;
-                font-size: 0.95rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 30px 20px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .message {
+            .intro {
                 font-size: 0.9rem;
             }
 
-            .linkedin-link {
-                padding: 10px 20px;
-                font-size: 0.9rem;
+            .links {
+                justify-content: center;
+            }
+
+            .link-item {
+                font-size: 0.85rem;
+                padding: 8px 16px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
+        <div class="profile-section">
+            <img src="assets/ananya.png" alt="ananya's photo" class="profile-image">
+            <div class="profile-content">
+                <h1>ananya pandey</h1>
+                <p class="subtitle">fullstack developer | seeking summer 2026 internships</p>
+                <p class="intro">
+                    hello! i'm ananya, a developer with 5+ years of professional swe experience and a current grad student passionate about building scalable software.
+                </p>
+                <div class="links">
+                    <a href="#" class="link-item" id="emailBtn">email</a>
+                    <a href="https://github.com/ananya0996" target="_blank" class="link-item">github</a>
+                    <a href="https://www.linkedin.com/in/ananya-pandey/" target="_blank" class="link-item">linkedin</a>
+                    <a href="resume/resume.pdf" target="_blank" class="link-item">resume</a>
+                </div>
+            </div>
         </div>
-        
-        <h1>I'm Ananya<span class="cursor"></span></h1>
-        
-        <p class="message">
-            I'm an experienced software developer (5+ years) and a current UC Davis grad student. Please connect with me or view my work here:
-        </p>
-        
-        <a href="https://linkedin.com/in/ananya-pandey" class="linkedin-link" target="_blank" rel="noopener noreferrer">
-            LinkedIn
-        </a>
-        <a href="https://github.com/ananya0996" class="linkedin-link" target="_blank" rel="noopener noreferrer">
-            GitHub
-        </a>
     </div>
+    <div id="toast" class="toast">copied to clipboard!</div>
 
     <script>
-        // Add some interactive sparkle effect on mouse move
-        document.addEventListener('mousemove', (e) => {
-            if (Math.random() > 0.95) {
-                const sparkle = document.createElement('div');
-                sparkle.style.position = 'fixed';
-                sparkle.style.left = e.clientX + 'px';
-                sparkle.style.top = e.clientY + 'px';
-                sparkle.style.width = '4px';
-                sparkle.style.height = '4px';
-                sparkle.style.background = 'rgba(255, 255, 255, 0.6)';
-                sparkle.style.borderRadius = '50%';
-                sparkle.style.pointerEvents = 'none';
-                sparkle.style.zIndex = '1000';
-                sparkle.style.animation = 'sparkle 0.6s ease-out forwards';
-                document.body.appendChild(sparkle);
+        const emailBtn = document.getElementById('emailBtn');
+        const toast = document.getElementById('toast');
+        const email = 'ananya0996@gmail.com';
 
-                setTimeout(() => sparkle.remove(), 600);
-            }
+        emailBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            navigator.clipboard.writeText(email).then(function() {
+                toast.classList.add('show');
+                setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 3000);
+            }).catch(function(err) {
+                console.error('Failed to copy email:', err);
+            });
         });
-
-        // Add sparkle animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes sparkle {
-                0% { transform: scale(0) rotate(0deg); opacity: 1; }
-                100% { transform: scale(1) rotate(180deg); opacity: 0; }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>
